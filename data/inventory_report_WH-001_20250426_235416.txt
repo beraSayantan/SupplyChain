@@ -1,0 +1,11 @@
+======= INVENTORY REPORT =======
+Location: WH-001 (warehouse)
+Report Date: 2025-04-26 23:54:16
+Last Inventory Update: 2025-04-26 23:54:06
+
+PRODUCT INVENTORY:
+Product                                  Stock      Price           Value          
+------------------------------------------------------------------------------
+NewP                                     5          $700.00         $3500.00       
+------------------------------------------------------------------------------
+TOTAL INVENTORY VALUE: $3500.00

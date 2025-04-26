@@ -1,0 +1,7 @@
+======= INVENTORY SUMMARY REPORT =======
+Report Date: 2025-04-26 23:51:50
+
+=== SUMMARY ===
+Total Locations: 0
+Total Products: 0
+Total Inventory Value: $0.00
