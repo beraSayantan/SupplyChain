@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -166,47 +167,48 @@ public class ReportGenerator {
     // Method to read user input for report generation
     public static Map<String, Object> getReportParameters() {
         Map<String, Object> params = new HashMap<>();
-        Scanner scanner = new Scanner(System.in);
+        try (Scanner scanner = new Scanner(System.in)) {
         
-        System.out.println("===== Report Generation =====");
-        System.out.println("1. Inventory Report");
-        System.out.println("2. Sales Report");
-        System.out.println("3. Low Stock Report");
-        System.out.print("Select report type (1-3): ");
-        
-        int reportType = scanner.nextInt();
-        scanner.nextLine(); // Consume newline
-        
-        params.put("reportType", reportType);
-        
-        if (reportType == 2) { // Sales Report
-            System.out.print("Enter start date (YYYY-MM-DD): ");
-            String startDateStr = scanner.nextLine();
+            System.out.println("===== Report Generation =====");
+            System.out.println("1. Inventory Report");
+            System.out.println("2. Sales Report");
+            System.out.println("3. Low Stock Report");
+            System.out.print("Select report type (1-3): ");
             
-            System.out.print("Enter end date (YYYY-MM-DD): ");
-            String endDateStr = scanner.nextLine();
+            int reportType = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
             
-            try {
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                Date startDate = dateFormat.parse(startDateStr);
-                Date endDate = dateFormat.parse(endDateStr);
+            params.put("reportType", reportType);
+            
+            if (reportType == 2) { // Sales Report
+                System.out.print("Enter start date (YYYY-MM-DD): ");
+                String startDateStr = scanner.nextLine();
                 
-                params.put("startDate", startDate);
-                params.put("endDate", endDate);
-            } catch (Exception e) {
-                System.out.println("Invalid date format. Using current date range.");
-                // Use default date range (last 30 days)
-                Date endDate = new Date();
-                Date startDate = new Date(endDate.getTime() - 30 * 24 * 60 * 60 * 1000L);
-                params.put("startDate", startDate);
-                params.put("endDate", endDate);
+                System.out.print("Enter end date (YYYY-MM-DD): ");
+                String endDateStr = scanner.nextLine();
+                
+                try {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    Date startDate = dateFormat.parse(startDateStr);
+                    Date endDate = dateFormat.parse(endDateStr);
+                    
+                    params.put("startDate", startDate);
+                    params.put("endDate", endDate);
+                } catch (Exception e) {
+                    System.out.println("Invalid date format. Using current date range.");
+                    // Use default date range (last 30 days)
+                    Date endDate = new Date();
+                    Date startDate = new Date(endDate.getTime() - 30 * 24 * 60 * 60 * 1000L);
+                    params.put("startDate", startDate);
+                    params.put("endDate", endDate);
+                }
             }
+            
+            System.out.print("Enter output directory: ");
+            String directory = scanner.nextLine();
+            params.put("directory", directory);
+            
+            return params;
         }
-        
-        System.out.print("Enter output directory: ");
-        String directory = scanner.nextLine();
-        params.put("directory", directory);
-        
-        return params;
     }
 }

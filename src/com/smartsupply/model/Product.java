@@ -145,7 +145,9 @@ public class Product implements Serializable {
     // Method to generate a barcode
     public String generateBarcode() {
         if (this.barcode == null) {
-            this.barcode = "BAR-" + productId.replace("-", "").substring(0, 8).toUpperCase();
+            String processed = productId.replace("-", "");
+            int length = Math.min(processed.length(), 8);
+            this.barcode = "BAR-" + processed.substring(0, length).toUpperCase();
         }
         return this.barcode;
     }
@@ -153,7 +155,18 @@ public class Product implements Serializable {
     // Method to generate a QR code
     public String generateQRCode() {
         if (this.qrCode == null) {
-            this.qrCode = "QR-" + productId.replace("-", "").substring(0, 12).toUpperCase();
+            String processed = productId.replace("-", "");
+            StringBuilder qrBuilder = new StringBuilder("QR-");
+            
+            // Add as many characters as available from the processed ID
+            qrBuilder.append(processed.toUpperCase());
+            
+            // If the processed ID is shorter than 12 chars, pad with random digits
+            while (qrBuilder.length() < 15) { // "QR-" is 3 chars + 12 more needed
+                qrBuilder.append((int)(Math.random() * 10));
+            }
+            
+            this.qrCode = qrBuilder.toString();
         }
         return this.qrCode;
     }

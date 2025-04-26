@@ -1,0 +1,11 @@
+======= INVENTORY REPORT =======
+Location: WH-001 (warehouse)
+Report Date: 2025-04-26 12:44:32
+Last Inventory Update: 2025-04-26 12:36:52
+
+PRODUCT INVENTORY:
+Product                                  Stock      Price           Value          
+------------------------------------------------------------------------------
+Condom                                   69         $0.69           $47.61         
+------------------------------------------------------------------------------
+TOTAL INVENTORY VALUE: $47.61
